@@ -1,0 +1,10 @@
+{
+  "workbench.colorCustomizations": {
+    // Couleur de fond de la barre de statut (ex: un bleu-gris discret)
+    "statusBar.background": "#2e3c4d",
+    // Couleur du texte/icônes de la barre de statut
+    "statusBar.foreground": "#e1e4e8",
+    // Optionnel : change aussi la couleur si le dossier est ouvert à distance/Dev Container
+    "statusBar.debuggingBackground": "#38485a"
+  }
+}

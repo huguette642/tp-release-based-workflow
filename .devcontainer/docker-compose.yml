@@ -1,0 +1,29 @@
+name: tp-release-based-workflow
+version: '3.9'
+
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/typescript-node:24
+
+    volumes:
+      - ..:/workspaces:cached
+
+    command: sleep infinity
+
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/nest_db
+
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=nest_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data:

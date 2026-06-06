@@ -1,0 +1,41 @@
+{
+  "name": "Release-Based Workflow",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "nestjs.vscode-nestjs-schematics",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "firsttris.vscode-jest-runner",
+        "ckotzbauer.gitignore",
+        "Prisma.prisma"
+      ]
+    }
+  },
+
+  "forwardPorts": [3000, 5432],
+
+  // Installe les dépendances et applique les migrations à la création du conteneur
+  "postCreateCommand": "npm ci && npx prisma generate && npx prisma migrate dev --name init && npx prisma db seed",
+
+  "remoteUser": "node",
+
+  "remoteEnv": {
+    "GIT_AUTHOR_NAME": "${localEnv:GIT_AUTHOR_NAME:}",
+    "GIT_AUTHOR_EMAIL": "${localEnv:GIT_AUTHOR_EMAIL:}",
+    "GIT_COMMITTER_NAME": "${localEnv:GIT_COMMITTER_NAME:}",
+    "GIT_COMMITTER_EMAIL": "${localEnv:GIT_COMMITTER_EMAIL:}"
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true,
+      "upgradePackages": false
+    },
+    "ghcr.io/devcontainers/features/git:1": {}
+  }
+}
